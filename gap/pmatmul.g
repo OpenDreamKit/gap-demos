@@ -1,74 +1,3 @@
-BenchMark := function(f, args...)
-    local  ma, rt, ns, res, r, wall, cpu;
-    ma := TotalMemoryAllocated(); 
-    rt := Runtime(); 
-    ns := NanosecondsSinceEpoch(); 
-    res := CallFuncListWrap(f, args);
-    r := rec(mem := TotalMemoryAllocated() - ma,
-             wall := NanosecondsSinceEpoch() - ns,
-             cpu := Runtime() -rt);
-    if IsBound(res[1]) then
-        r.result := res[1];
-    fi;
-    return r;
-end;
-
-
-assemble := function(ns, scale, unit)
-    local  s;
-    if ns mod scale = 0 then
-        return Concatenation(String(QuoInt(ns, scale)),unit);
-    else 
-        s := Concatenation(String(QuoInt(ns, scale)),".");
-        if ns mod QuoInt(scale,10) = 0 then
-            Append(s, String(QuoInt(ns, QuoInt(scale, 10)) mod 10));
-        else
-            Append(s, String(QuoInt(ns, QuoInt(scale, 100)) mod 100));
-        fi;
-        Append(s,unit);
-        return s;
-    fi;
-end;
-
-ns2string := function(ns)
-    if ns > 10^9 then
-        return assemble(ns, 10^9, "s");
-    elif ns > 10^6 then
-        return assemble(ns, 10^6, "ms");
-    elif ns > 10^3 then
-        return assemble(ns, 10^3, "us");
-    else
-        return assemble(ns, 1, "ns");
-    fi;
-end;
-
-mem2string := function(bytes)
-    if bytes > 2^40 then
-        return assemble(bytes, 2^40, "TB");
-    elif bytes > 2^30 then
-        return assemble(bytes, 2^30, "GB");
-    elif bytes > 2^20 then
-        return assemble(bytes, 2^20, "MB");
-    elif bytes > 2^10 then
-        return assemble(bytes, 2^10, "KB");
-    else
-        return assemble(bytes, 1, "B");
-    fi;
-end;
-
-ShowBench := function(args...)     
-    local  r;
-    r := CallFuncList(BenchMark, args);
-    Print("wall time: ",ns2string(r.wall)," cpu time: ",
-          ns2string(10^6*r.cpu)," memory allocated: ",
-          mem2string(r.mem));
-    if IsBound(r.result) then
-        Print(" result returned\n");
-    else
-        Print(" no result returned\n");
-    fi;
-end;
-
    
 
 AddMat := function(m1, m2)
@@ -219,14 +148,6 @@ ParFiltered := function(l, f...)
     od;
     return filt;
     
-end;
-
-
-    
-Read("/Users/sal/gap/makepar.g");
-
-ParBrute := function(s)
-    return ParFiltered(PartitionsSet([2..s.rank]), p -> TestPartition(s,p),100);
 end;
 
 
