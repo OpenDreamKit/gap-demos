@@ -281,9 +281,22 @@ for c in counts do
     fi;
 od;  
 
-gapRecord.data[1].locations := maplocations;;
-gapRecord.data[1].z := values;;
+gapRecord.data[1].locations := ShallowCopy(maplocations);;
+gapRecord.data[1].z := ShallowCopy(values);;
 gapRecord.data[1].zmax := Maximum(List(counts, c -> c[2]));;
+
+Print("--------------------------------------------------------\n");
+Print("Package activities by country\n");
+Print("--------------------------------------------------------\n");
+values := List(values,Int);
+StableSortParallel(values,maplocations,function(v,w) return v > w; end);
+for c in [1..Length(values)] do
+    if values[c] = 0 then 
+        break; 
+    fi;
+    Print(values[c], " : ", maplocations[c], "\n");
+od;    
+Print("--------------------------------------------------------\n");
 
 if IsBound( gapRecord.layout ) then
     gapRecord.layout.height := 1000;;
