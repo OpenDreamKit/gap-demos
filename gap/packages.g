@@ -45,7 +45,7 @@ end;
 # SPDX license identifier in PackageInfo.g
 PackagesByLicenseType:=function()
 
-local pkgnames, haveSPDXinfo, lackSPDXinfo, x;
+local pkgnames, haveSPDXinfo, lackSPDXinfo, x, licinfo;
 
 pkgnames := SortedList(RecNames(GAPInfo.PackagesInfo));
 
@@ -55,13 +55,21 @@ lackSPDXinfo := Filtered( pkgnames, n -> not IsBound( GAPInfo.PackagesInfo.(n)[1
 Print("*** ", Length(haveSPDXinfo), " packages have SPDX license identifier in PackageInfo.g\n");
 Print("*** ", Length(lackSPDXinfo), " packages have no SPDX license identifier in PackageInfo.g\n\n");
 
+licinfo := Collected( List( haveSPDXinfo, n -> GAPInfo.PackagesInfo.(n)[1].License) );
+Add(licinfo, ["Not specified", Length(lackSPDXinfo) ]);
+licinfo := List( licinfo, Reversed );
+licinfo := Reversed(SortedList(licinfo));
+
 Print("*** Licence types, when SPDX license identifier provided:\n");
-for x in  Collected( List( haveSPDXinfo, n -> GAPInfo.PackagesInfo.(n)[1].License) ) do
-  Print(x[2], " : ", x[1], "\n");
+for x in licinfo do
+  Print(x[1], " : ", x[2], "\n");
 od;
 Print("\n");
 
+return List( licinfo, Reversed );
+
 end;
+
 
 # Test files
 PackagesStandardTests:=function()
