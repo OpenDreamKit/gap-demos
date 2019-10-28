@@ -166,6 +166,14 @@ Print("\n\n");
  
 end;
 
+PackageAuthorNumbers:=function()
+local pkgnames, n, nr_authors;
+pkgnames := SortedList(RecNames(GAPInfo.PackagesInfo));
+nr_authors := List(pkgnames,n->Length(GAPInfo.PackagesInfo.(n)[1].Persons));
+return(Collected(nr_authors));
+end;
+
+
 maplocations := 
 [ "", "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", 
 "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", 
