@@ -144,66 +144,6 @@ pkgdata:= [
 
 ];
 
-gapRecord:=
-rec(
-  data := [ rec(
-          autocolorscale := false,
-          colorbar := rec(
-              thickness := 10,
-              title := "" ),
-          colorscale := [ [ 0, "rgb(255,255,255)" ], 
-                          [ 0.01, "rgb(245,195,157)" ], 
-                          [ 0.2, "rgb(245,160,105)" ], 
-                          [ 1, "rgb(178,10,28)" ] ],
-          locationmode := "country names",
-          locations := maplocations,
-          locationssrc := "Dreamshot:9297:009d61",
-          name := "B",
-          showscale := true,
-          type := "choropleth",
-          z := values,
-          zauto := false,
-          zmin := 0,
-          zsrc := "Dreamshot:9297:7e6159" ) ],
-  frames := [ rec(
-          layout := rec(
-              autosize := false,
-              font := rec(
-                  size := 10 ),
-              geo := rec(
-                  center := rec(
-                      lat := 76.15672511523269,
-                      lon := -81.57473507220712 ),
-                  projection := rec( type := "equirectangular" ) ),
-              height := 300,
-              hovermode := "closest",
-              margin := rec(
-                  b := 40,
-                  l := 40,
-                  r := 40,
-                  t := 75 ),
-title := "Locations of GAP package authors",
-              titlefont := rec(
-                  family := "Overpass",
-                  size := 12 ),
-              width := 400 ),
-          name := "workspace-breakpoint-0" ) ],
-  layout := rec(
-      autosize := true,
-      font := rec(
-          family := "Overpass" ),
-      geo := rec(
-          center := rec(
-              lat := 55.31688841607437,
-              lon := -65.03023468634588 ),
-          projection := rec( type := "equirectangular" ) ),
-      height := 500,
-      hovermode := "closest",
-      title := "Locations of GAP package authors",
-      titlefont := rec(
-          family := "Overpass" ) ) )
-;;
-
 location := function(author)
     local address, loc, country;
 
@@ -257,4 +197,100 @@ location := function(author)
         return country[1];
     fi;
     return fail;    
+end;
+
+PackagesByCountries:=function()
+
+local gapRecord, countries, country, n, author, counts, c, pos;
+
+gapRecord:=
+rec(
+  data := [ rec(
+          autocolorscale := false,
+          colorbar := rec(
+              thickness := 10,
+              title := "" ),
+          colorscale := [ [ 0, "rgb(255,255,255)" ], 
+                          [ 0.01, "rgb(245,195,157)" ], 
+                          [ 0.2, "rgb(245,160,105)" ], 
+                          [ 1, "rgb(178,10,28)" ] ],
+          locationmode := "country names",
+          locationssrc := "Dreamshot:9297:009d61",
+          name := "B",
+          showscale := true,
+          type := "choropleth",
+          zauto := false,
+          zmin := 0,
+          zsrc := "Dreamshot:9297:7e6159" ) ],
+  frames := [ rec(
+          layout := rec(
+              autosize := false,
+              font := rec(
+                  size := 10 ),
+              geo := rec(
+                  center := rec(
+                      lat := 76.15672511523269,
+                      lon := -81.57473507220712 ),
+                  projection := rec( type := "equirectangular" ) ),
+              height := 300,
+              hovermode := "closest",
+              margin := rec(
+                  b := 40,
+                  l := 40,
+                  r := 40,
+                  t := 75 ),
+title := "Locations of GAP package authors",
+              titlefont := rec(
+                  family := "Overpass",
+                  size := 12 ),
+              width := 400 ),
+          name := "workspace-breakpoint-0" ) ],
+  layout := rec(
+      autosize := true,
+      font := rec(
+          family := "Overpass" ),
+      geo := rec(
+          center := rec(
+              lat := 55.31688841607437,
+              lon := -65.03023468634588 ),
+          projection := rec( type := "equirectangular" ) ),
+      height := 500,
+      hovermode := "closest",
+      title := "Locations of GAP package authors",
+      titlefont := rec(
+          family := "Overpass" ) ) );
+
+countries:=[];;
+for n in pkgnames do
+    for author in GAPInfo.PackagesInfo.(n)[1].Persons do
+        country := location(author);
+        if country <> fail then
+            Add(countries,country);
+        else    
+            Print("Warning: no country detected for ", author.FirstNames, " ", author.LastName, ", package ", n, "\n");
+        fi;
+    od;
+od;
+
+counts:=Collected(countries);
+
+for c in counts do
+    pos := Position(maplocations,c[1]);
+    if pos <> fail then 
+        values[pos]:=String(c[2]);
+    fi;
+od;  
+
+gapRecord.data[1].locations := maplocations;;
+gapRecord.data[1].z := values;;
+gapRecord.data[1].zmax := Maximum(List(counts, c -> c[2]));;
+
+if IsBound( gapRecord.layout ) then
+    gapRecord.layout.height := 1000;;
+else
+    gapRecord.layout := rec( height := 1000 );;
+fi;
+
+return gapRecord;
+
 end;
