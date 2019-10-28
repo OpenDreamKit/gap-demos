@@ -10,7 +10,7 @@ RUN jupyter-nbextension install rise --user --py
 
 RUN jupyter-nbextension enable rise --user --py
 
-RUN jupyter-nbextension enable jupyter_francy --user --py --sys-prefix
+RUN jupyter nbextension enable --user --py --sys-prefix jupyter_francy
 
 USER gap
 
