@@ -4,33 +4,32 @@
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/hpc-gap?filepath=Index.ipynb) Run in HPC-GAP in GAP master branch
 
-# gap-demos
+# Welcome to GAP Jupyter notebooks!
 
-A collection of GAP Jupyter notebooks for demonstration
+This repository contains a collection of examples of using GAP in Jupyter.
+Follow links from <https://github.com/OpenDreamKit/gap-demos/blob/master/Index.ipynb>
+to other notebooks in this collection to see their content rendered on GitHub.
 
-This is a collection of GAP Jupyter notebooks. It uses the Docker
-container with the latest public release of GAP, which is maintained in
-a separate repository at <https://github.com/gap-system/gap-docker>, in
-order to allow to run these notebooks on Binder (<https://mybinder.org/>).
+To explore this collection further, in particular to see the graphical elements
+that are not rendered by the GitHub notebooks viewer, you need to open these 
+notebooks in Jupyter. You can do this locally in your clone of this repository,
+or remotely by running them on Binder (<https://mybinder.org/>).
 
 To launch these notebooks in an executable environment on Binder, perform
 the following steps:
 
-1. Click on the "launch binder" badge in this README file on GitHub, or open
-<https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/master> in the browser.
+1. Click on one of the "launch binder" badges above, selecting the
+version of GAP which you need.
 
-2. First "Loading repository: OpenDreamKit/gap-demos/master" will be 
+2. First "Loading repository: OpenDreamKit/gap-demos/..." will be 
 displayed, followed by a non-interactive preview. When the environment
-will be ready, you will see the main Jupyter screen with a list of files.
+will be ready, you will see the index file with the content of this
+repository.
 
-3. Click on any `.ipynb` file to open it. This will start GAP Jupyter notebook.
+3. Click on a link to another GAP Jupyter notebook to open it.
 You should be able to run the code in the notebook, e.g. by executing one cell
 after another, or by running all cells, and perform other actions, e.g. add
 new cells to the notebook, or start a new notebook. Your changes will not be
 preserved after the window will be closed, but you should be able to download
 the notebook in various formats. For further information about Jupyter, see 
 <https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/index.html>.
-
-Note that GitHub renders Jupyter notebooks in a human readable form, see e.g.
-<https://github.com/OpenDreamKit/gap-demos/blob/master/notebooks/HomophonicQuotientsOfFreeGroups.ipynb>. 
-
