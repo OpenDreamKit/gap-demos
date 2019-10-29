@@ -1,8 +1,8 @@
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/master) Run in the latest official GAP release
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/master?filepath=Index.ipynb) Run in the latest official GAP release
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/gap-master) Run in GAP master branch
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/gap-master?filepath=Index.ipynb) Run in GAP master branch
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/hpc-gap) Run in HPC-GAP in GAP master branch
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/hpc-gap?filepath=Index.ipynb) Run in HPC-GAP in GAP master branch
 
 # gap-demos
 
