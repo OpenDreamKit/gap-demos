@@ -1,4 +1,7 @@
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/master)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/master) Run in the latest official GAP release
+
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/gap-master) Run in GAP master branch
+
 
 # gap-demos
 
