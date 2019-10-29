@@ -2,6 +2,7 @@
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/gap-master) Run in GAP master branch
 
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/OpenDreamKit/gap-demos/hpc-gap) Run in HPC-GAP in GAP master branch
 
 # gap-demos
 
