@@ -1,13 +1,13 @@
 
 ParMult := function(m1, m2)
-    MTX64_WriteMatrix(m1,"a");
+    MTX64_WriteMatrix(m1,"/tmp/a");
     if IsIdenticalObj(m1,m2) then
-        MTX64_fMultiply(".","a","a","c");
+        MTX64_fMultiply("/tmp","/tmp/a","/tmp/a","/tmp/c");
     else
-        MTX64_WriteMatrix(m2,"b");
-        MTX64_fMultiply(".","a","b","c");
+        MTX64_WriteMatrix(m2,"/tmp/b");
+        MTX64_fMultiply("/tmp","/tmp/a","/tmp/b","/tmp/c");
     fi;
-    return MTX64_ReadMatrix("c");
+    return MTX64_ReadMatrix("/tmp/c");
 end;
 
 MTX64_KroneckerProduct := function(mat1, mat2)

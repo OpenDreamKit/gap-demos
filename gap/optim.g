@@ -218,10 +218,19 @@ RewriteFunc := function(f, pattern, replacement)
     return SYNTAX_TREE_CODE(STPatternReplace(SyntaxTree(f), pattern, replacement)!.tree);
 end;
 
-   
-    
-        
-    
+IntFix :=   rec( 
+                 pattern := rec(type := "EXPR_FUNCCALL_1ARGS", 
+                         funcref := rec(type := "EXPR_REF_GVAR", gvar := "Int"),
+                         args := [rec(type := "EXPR_QUO", left := "$1", right := rec(type := "EXPR_INT", value := "$2"))]),
+                 replace := rec(type := "EXPR_FUNCCALL_2ARGS",
+                         funcref := rec(type := "EXPR_REF_GVAR", gvar := "QuoInt"),
+                         args := ["$1",rec(type := "EXPR_INT", value := "$2") ]));
+
+AllGlobalGapFunctions :=  Filtered(List(Filtered(NamesGVars(), IsBoundGlobal), ValueGlobal), 
+                                  x-> IsFunction(x) and not IsKernelFunction(x));
+
+GapMethods := Flat(List(OPERATIONS, o -> List([0..6], i-> Filtered(List(MethodsOperation(o,i), x-> x.func),
+                      x-> IsFunction(x) and not IsKernelFunction(x)))));
 
         
     
