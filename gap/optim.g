@@ -80,7 +80,9 @@ STMatch := function(tree,pattern)
                     return false;
                 fi;
                 for i in [1..l] do
-                    addMatches(matches, tree.(n)[i], pattern.(n)[i]);
+                    if not addMatches(matches, tree.(n)[i], pattern.(n)[i]) then
+                        return false;
+                    fi;
                 od;
             else
                 if not addMatches(matches, tree.(n), pattern.(n)) then
