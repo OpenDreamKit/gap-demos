@@ -1,8 +1,16 @@
-FROM gapsystem/gap-docker
+FROM gapsystem/gap-docker-master
 
 MAINTAINER Alexander Konovalov <alexander.konovalov@st-andrews.ac.uk>
 
 COPY --chown=1000:1000 . $HOME/gap-demos
+
+RUN cd $GAP_HOME/pkg \
+ && wget https://github.com/gap-packages/meataxe64/releases/download/v0.1/meataxe64-0.1.tar.gz \
+ && tar -xzf meataxe64*.tar.gz \
+ && cd meataxe64* \
+ && ./autogen.sh \
+ && ./configure --with-gaproot=$GAP_HOME \
+ && make
 
 RUN sudo pip3 install ipywidgets RISE jupyter_francy
 
