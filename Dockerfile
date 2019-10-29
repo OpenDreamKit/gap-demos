@@ -1,4 +1,4 @@
-FROM gapsystem/gap-docker-master
+FROM gapsystem/gap-docker-master@sha256:2715268dba1237f22e173931db5d32f45d8d9fd6244e3c1f52548abf4910602e
 
 MAINTAINER Alexander Konovalov <alexander.konovalov@st-andrews.ac.uk>
 
